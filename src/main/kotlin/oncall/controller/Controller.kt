@@ -10,7 +10,7 @@ class Controller {
     fun start() {
         val (month, day) = getMonthAndDay()
         val calendarManagement = CalendarManagement(month, day)
-
+        val (weekWorker,weekendWorker) = getWorker()
 
     }
 
@@ -25,5 +25,30 @@ class Controller {
                 println(e.message)
             }
         }
+    }
+
+    fun getWorker(): Pair<List<String>, List<String>> {
+        while (true) {
+            try {
+                val weekWorker = getWeekWorker()
+                val weekendWorker = getWeekendWorker()
+                validator.isSameWorker(weekWorker, weekendWorker)
+                return Pair(weekWorker, weekendWorker)
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
+    fun getWeekWorker(): List<String> {
+        val input = inputView.getWeekWorker()
+        validator.validateInputWorker(input)
+        return input.split(",").map { it.replace(" ", "") }
+    }
+
+    fun getWeekendWorker(): List<String> {
+        val input = inputView.getWeekendWorker()
+        validator.validateInputWorker(input)
+        return input.split(",").map { it.replace(" ", "") }
     }
 }
