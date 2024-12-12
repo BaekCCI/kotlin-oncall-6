@@ -1,5 +1,7 @@
 package oncall.data
 
+import oncall.constant.DayOfWeek
+
 data class DayInfo(
     val month: Int,
     val date: Int,

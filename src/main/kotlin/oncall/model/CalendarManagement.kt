@@ -1,9 +1,9 @@
 package oncall.model
 
 import oncall.data.DayInfo
-import oncall.data.DayOfWeek
-import oncall.data.Holiday
-import oncall.data.MaxDateOfMonth
+import oncall.constant.DayOfWeek
+import oncall.constant.Holiday
+import oncall.constant.MaxDateOfMonth
 
 data class CalendarManagement(val month: Int, val dayOfWeek: String) {
     val calendar: MutableList<DayInfo> = mutableListOf()

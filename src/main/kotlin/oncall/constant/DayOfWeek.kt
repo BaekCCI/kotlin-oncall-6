@@ -1,4 +1,4 @@
-package oncall.data
+package oncall.constant
 
 enum class DayOfWeek(val dayOfWeek: String, val isWeek: Boolean, val index: Int) {
     SUN("일", false, 0),

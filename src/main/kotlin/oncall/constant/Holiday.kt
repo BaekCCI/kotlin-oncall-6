@@ -1,4 +1,4 @@
-package oncall.data
+package oncall.constant
 
 enum class Holiday(val month: Int, val date: Int) {
     NEW_YEAR(1, 1),

@@ -1,31 +1,17 @@
 package oncall
 
-import oncall.data.DayOfWeek
+import MAX_NAME_LENGTH
+import MAX_NUMBER_OF_WORKER
+import MIN_NUMBER_OF_WORKER
+import MONTH_AND_DAY_REGEX
+import WORKER_INPUT_FROM_REGEX
+import oncall.constant.DayOfWeek
+import oncall.constant.ErrorMessage
 import java.util.*
-
-const val MONTH_AND_DAY_REGEX = "^\\d+,[ㄱ-ㅎ가-힣]+$"
-const val WORKER_INPUT_FROM_REGEX = "^[ㄱ-ㅎ가-힣a-zA-Z]+(,[ㄱ-ㅎ가-힣a-zA-Z]+)*$"
-const val MAX_NUMBER_OF_WORKER = 35
-const val MIN_NUMBER_OF_WORKER = 5
-const val MAX_NAME_LENGTH = 5
-
-enum class ErrorMessage(private val message: String) {
-    INVALID_FORM("유효하지 않은 입력 값입니다. 다시 입력해 주세요."),
-    MONTH_OUT_OF_RANGE("월은 1~12 사이여야 합니다."),
-    DAY_OUT_OF_RANGE("요일은 일~토 사이여야 합니다."),
-    WORKER_OUT_OF_RANGE("근무자 수는 5~35명 사이여야 합니다."),
-    DUPLICATE_WORKER("중복된 닉네임이 존재합니다."),
-    WORKER_NAME_LENGTH("닉네임은 최대 5자입니다."),
-    SAME_WORKER("동일한 근무자를 입력해주세요.");
-
-    fun format(): String {
-        return "[ERROR] $message"
-    }
-}
 
 class Validator {
     fun validateInputMonthAndDay(input: String) {
-        val formatInput = input.replace(" ","")
+        val formatInput = input.replace(" ", "")
         require(formatInput.matches(MONTH_AND_DAY_REGEX.toRegex())) { ErrorMessage.INVALID_FORM.format() }
         val monthAndDay = formatInput.split(",")
         require(monthAndDay[0].toInt() in 1..12) { ErrorMessage.MONTH_OUT_OF_RANGE.format() }
@@ -34,7 +20,7 @@ class Validator {
 
     fun validateInputWorker(input: String) {
         val formatInput = input.replace(" ", "")
-        require(formatInput.matches(WORKER_INPUT_FROM_REGEX.toRegex())){ ErrorMessage.INVALID_FORM.format() }
+        require(formatInput.matches(WORKER_INPUT_FROM_REGEX.toRegex())) { ErrorMessage.INVALID_FORM.format() }
         val workers = formatInput.split(",")
         require(workers.size in MIN_NUMBER_OF_WORKER..MAX_NUMBER_OF_WORKER) { ErrorMessage.WORKER_OUT_OF_RANGE.format() }
         require(workers.distinct().size == workers.size) { ErrorMessage.DUPLICATE_WORKER.format() }

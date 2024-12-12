@@ -28,7 +28,7 @@ class AssignManagement(
     fun assignWeekWorker(dayInfo: DayInfo) {
         var temp: String? = null
 
-        if (assignedWorkers.isNotEmpty() && weekWorker.isNotEmpty() && assignedWorkers.last.name == weekWorker.first()) {
+        if (assignedWorkers.isNotEmpty() && assignedWorkers.last.name == weekWorker.first()) {
             temp = weekWorker.first
             weekWorker.remove()
         }
@@ -44,7 +44,7 @@ class AssignManagement(
 
     fun assignWeekendWorker(dayInfo: DayInfo) {
         var temp: String? = null
-        if (assignedWorkers.isNotEmpty() && weekendWorker.isNotEmpty() && assignedWorkers.last.name == weekendWorker.first()) {
+        if (assignedWorkers.isNotEmpty() && assignedWorkers.last.name == weekendWorker.first()) {
             temp = weekendWorker.first
             weekendWorker.remove()
         }

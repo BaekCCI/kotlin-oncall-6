@@ -1,4 +1,4 @@
-package oncall.data
+package oncall.constant
 
 enum class MaxDateOfMonth(val maxDate: Int, val month: List<Int>) {
     DAY_31(31, listOf(1, 3, 5, 7, 8, 10, 12)),
