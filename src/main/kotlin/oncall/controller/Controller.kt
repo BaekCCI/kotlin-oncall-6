@@ -1,17 +1,25 @@
 package oncall.controller
 
 import oncall.Validator
+import oncall.model.AssignManagement
 import oncall.model.CalendarManagement
+import oncall.model.Worker
 import oncall.view.InputView
+import oncall.view.OutputView
+import java.util.*
 
 class Controller {
     val inputView = InputView()
     val validator = Validator()
+    val outputView = OutputView()
+
     fun start() {
         val (month, day) = getMonthAndDay()
         val calendarManagement = CalendarManagement(month, day)
-        val (weekWorker,weekendWorker) = getWorker()
-
+        val calendar = calendarManagement.calendar
+        val (weekWorker, weekendWorker) = getWorker()
+        val assignManagement = AssignManagement(calendar, weekWorker, weekendWorker)
+        displayResult(assignManagement.getSchedule())
     }
 
     fun getMonthAndDay(): Pair<Int, String> {
@@ -27,7 +35,7 @@ class Controller {
         }
     }
 
-    fun getWorker(): Pair<List<String>, List<String>> {
+    fun getWorker(): Pair<Deque<String>, Deque<String>> {
         while (true) {
             try {
                 val weekWorker = getWeekWorker()
@@ -40,15 +48,32 @@ class Controller {
         }
     }
 
-    fun getWeekWorker(): List<String> {
+    fun getWeekWorker(): Deque<String> {
         val input = inputView.getWeekWorker()
         validator.validateInputWorker(input)
-        return input.split(",").map { it.replace(" ", "") }
+        val weekWorker: Deque<String> = LinkedList()
+        val workers = input.split(",").map { it.replace(" ", "") }
+        workers.forEach {
+            weekWorker.add(it)
+        }
+        return weekWorker
     }
 
-    fun getWeekendWorker(): List<String> {
+    fun getWeekendWorker(): Deque<String> {
         val input = inputView.getWeekendWorker()
         validator.validateInputWorker(input)
-        return input.split(",").map { it.replace(" ", "") }
+        val weekendWorker: Deque<String> = LinkedList()
+        val workers = input.split(",").map { it.replace(" ", "") }
+        workers.forEach {
+            weekendWorker.add(it)
+        }
+        return weekendWorker
+    }
+
+    fun displayResult(schedule: Deque<Worker>) {
+        schedule.forEach {
+            outputView.displayResult(it.workDay, it.name)
+        }
+
     }
 }
