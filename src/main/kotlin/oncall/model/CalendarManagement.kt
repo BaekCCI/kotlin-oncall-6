@@ -4,7 +4,7 @@ import oncall.data.DayOfWeek
 import oncall.data.Holiday
 import oncall.data.MaxDateOfMonth
 
-class CalendarManagement(val month: Int, val dayOfWeek: String) {
+data class CalendarManagement(val month: Int, val dayOfWeek: String) {
     val calendar: MutableList<DayInfo> = mutableListOf()
 
     init {

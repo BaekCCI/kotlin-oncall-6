@@ -1,6 +1,7 @@
 package oncall
 
 import oncall.data.DayOfWeek
+import java.util.*
 
 const val MONTH_AND_DAY_REGEX = "^\\d+,[ㄱ-ㅎ가-힣]+$"
 const val WORKER_INPUT_FROM_REGEX = "^[ㄱ-ㅎ가-힣a-zA-Z]+(,[ㄱ-ㅎ가-힣a-zA-Z]+)*$"
@@ -41,7 +42,7 @@ class Validator {
         }
     }
 
-    fun isSameWorker(weekWorker: List<String>, weekendWorker: List<String>) {
+    fun isSameWorker(weekWorker: Queue<String>, weekendWorker: Queue<String>) {
         require(weekWorker.intersect(weekendWorker).size == weekWorker.size) { ErrorMessage.SAME_WORKER.format() }
     }
 }
