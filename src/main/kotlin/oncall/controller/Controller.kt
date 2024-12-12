@@ -3,7 +3,7 @@ package oncall.controller
 import oncall.Validator
 import oncall.model.AssignManagement
 import oncall.model.CalendarManagement
-import oncall.model.Worker
+import oncall.data.Worker
 import oncall.view.InputView
 import oncall.view.OutputView
 import java.util.*

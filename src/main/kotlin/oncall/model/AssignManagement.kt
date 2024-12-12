@@ -1,6 +1,7 @@
 package oncall.model
 
 import oncall.data.DayInfo
+import oncall.data.Worker
 import java.util.*
 
 class AssignManagement(

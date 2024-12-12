@@ -1,6 +1,4 @@
-package oncall.model
-
-import oncall.data.DayInfo
+package oncall.data
 
 data class Worker(
     val name : String,
