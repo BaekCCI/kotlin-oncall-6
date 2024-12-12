@@ -1,6 +1,4 @@
-package oncall.model
-
-import oncall.data.DayOfWeek
+package oncall.data
 
 data class DayInfo(
     val month: Int,
@@ -9,7 +7,7 @@ data class DayInfo(
     var isHoliday: Boolean = false
 ) {
     fun isWeek(): Boolean {
-        return DayOfWeek.entries.find { it.dayOfWeek == dayOfWeek }?.isWeek ?: false
+        return DayOfWeek.isWeek(dayOfWeek)
     }
 
     fun checkIsHoliday(): Boolean {

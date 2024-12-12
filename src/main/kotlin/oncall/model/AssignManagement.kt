@@ -1,5 +1,6 @@
 package oncall.model
 
+import oncall.data.DayInfo
 import java.util.*
 
 class AssignManagement(
@@ -25,12 +26,16 @@ class AssignManagement(
 
     fun assignWeekWorker(dayInfo: DayInfo) {
         var temp: String? = null
-        if (assignedWorkers.last.name == weekWorker.first()) {
+
+        if (assignedWorkers.isNotEmpty() && weekWorker.isNotEmpty() && assignedWorkers.last.name == weekWorker.first()) {
             temp = weekWorker.first
             weekWorker.remove()
         }
         addWorker(weekWorker, dayInfo)
+        val assignedWorker = weekWorker.first
         weekWorker.remove()
+        weekWorker.addLast(assignedWorker)
+
         if (temp != null) {
             weekWorker.addFirst(temp)
         }
@@ -38,12 +43,16 @@ class AssignManagement(
 
     fun assignWeekendWorker(dayInfo: DayInfo) {
         var temp: String? = null
-        if (assignedWorkers.last.name == weekendWorker.first()) {
+        if (assignedWorkers.isNotEmpty() && weekendWorker.isNotEmpty() && assignedWorkers.last.name == weekendWorker.first()) {
             temp = weekendWorker.first
             weekendWorker.remove()
         }
+
         addWorker(weekendWorker, dayInfo)
+        val assignedWorker = weekendWorker.first
         weekendWorker.remove()
+        weekendWorker.addLast(assignedWorker)
+
         if (temp != null) {
             weekendWorker.addFirst(temp)
         }
@@ -57,7 +66,8 @@ class AssignManagement(
             )
         )
     }
-    fun getSchedule():Deque<Worker>{
+
+    fun getSchedule(): Deque<Worker> {
         return assignedWorkers
     }
 }

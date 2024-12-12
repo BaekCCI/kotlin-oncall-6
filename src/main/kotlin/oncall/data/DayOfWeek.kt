@@ -1,13 +1,13 @@
 package oncall.data
 
 enum class DayOfWeek(val dayOfWeek: String, val isWeek: Boolean, val index: Int) {
-    SUN("일", true, 0),
-    MON("월", false, 1),
-    TUE("화", false, 2),
-    WED("수", false, 3),
-    THUR("목", false, 4),
-    FRI("금", false, 5),
-    SAT("토", true, 6);
+    SUN("일", false, 0),
+    MON("월", true, 1),
+    TUE("화", true, 2),
+    WED("수", true, 3),
+    THUR("목", true, 4),
+    FRI("금", true, 5),
+    SAT("토", false, 6);
 
     companion object {
         fun getIndex(dayOfWeek: String): Int {
@@ -20,6 +20,9 @@ enum class DayOfWeek(val dayOfWeek: String, val isWeek: Boolean, val index: Int)
 
         fun isExistInDayOfWeek(input: String): Boolean {
             return entries.any { it.dayOfWeek == input }
+        }
+        fun isWeek(dayOfWeek:String):Boolean{
+            return entries.find { it.dayOfWeek == dayOfWeek }?.isWeek ?: false
         }
     }
 }

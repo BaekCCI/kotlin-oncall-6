@@ -1,6 +1,6 @@
 package oncall.view
 
-import oncall.model.DayInfo
+import oncall.data.DayInfo
 
 enum class OutputMessage(val message: String) {
     WORK_SCHEDULE("%d월 %d일 %s%s %s");

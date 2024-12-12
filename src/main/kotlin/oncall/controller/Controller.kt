@@ -54,7 +54,7 @@ class Controller {
         val weekWorker: Deque<String> = LinkedList()
         val workers = input.split(",").map { it.replace(" ", "") }
         workers.forEach {
-            weekWorker.add(it)
+            weekWorker.addLast(it)
         }
         return weekWorker
     }
@@ -65,12 +65,13 @@ class Controller {
         val weekendWorker: Deque<String> = LinkedList()
         val workers = input.split(",").map { it.replace(" ", "") }
         workers.forEach {
-            weekendWorker.add(it)
+            weekendWorker.addLast(it)
         }
         return weekendWorker
     }
 
     fun displayResult(schedule: Deque<Worker>) {
+        println()
         schedule.forEach {
             outputView.displayResult(it.workDay, it.name)
         }

@@ -1,5 +1,6 @@
 package oncall.model
 
+import oncall.data.DayInfo
 import oncall.data.DayOfWeek
 import oncall.data.Holiday
 import oncall.data.MaxDateOfMonth
