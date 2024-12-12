@@ -17,5 +17,9 @@ enum class DayOfWeek(val dayOfWeek: String, val isWeek: Boolean, val index: Int)
         fun getDayOfWeek(index: Int): String {
             return entries.find { it.index == index }?.dayOfWeek ?: throw IllegalArgumentException()
         }
+
+        fun isExistInDayOfWeek(input: String): Boolean {
+            return entries.any { it.dayOfWeek == input }
+        }
     }
 }
